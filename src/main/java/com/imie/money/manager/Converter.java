@@ -4,6 +4,13 @@ import com.imie.money.model.Money;
 
 public class Converter {
 
+    private CurrencyRate currencyRate;
+
+    public Converter(CurrencyRate currencyRate) {
+
+        this.currencyRate = currencyRate;
+    }
+
     public Money add(Money m1, Money m2) {
 
         if(m1==null || m2==null) {
@@ -15,7 +22,8 @@ public class Converter {
         }
 
         if(!m1.getCurrency().equals(m2.getCurrency())) {
-            throw new UnsupportedOperationException("Currency conversion not available yet");
+            return new Money(m1.getCurrency(), m1.getAmount() +
+                    m2.getAmount() * currencyRate.getCurrencyRate(m1.getCurrency(), m2.getCurrency()));
         }
 
         return new Money(m1.getCurrency(), m1.getAmount() + m2.getAmount());

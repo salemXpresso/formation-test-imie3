@@ -1,19 +1,42 @@
 package com.imie.money.manager;
 
+import com.imie.money.connector.CurrencyRateWsClient;
 import org.assertj.core.data.Offset;
+import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
+import java.io.IOException;
 import java.util.Currency;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class CurrencyRateTest {
 
+    private static final Currency USD = Currency.getInstance("USD");
+    private static final Currency EUR = Currency.getInstance("EUR");
+    private static final Currency GBP = Currency.getInstance("GBP");
+
+    private CurrencyRate currencyRate;
+
+    @Before
+    public void setUp() throws IOException {
+        CurrencyRateWsClient mockedWsClient = mock(CurrencyRateWsClient.class);
+
+        Map<Currency, Float> ratesWithRef = new HashMap<>();
+        ratesWithRef.put(USD, 1f);
+        ratesWithRef.put(EUR, 1.16f);
+        ratesWithRef.put(GBP, 1.29f);
+        when(mockedWsClient.downloadLatestCurrencyRates(anyString(), any(Currency.class))).thenReturn(ratesWithRef);
+        currencyRate = new CurrencyRate(mockedWsClient, "");
+    }
+
     @Test
     public void test_getCurrencyRate_nominal_returnExpectedRate() {
 
         // Init context & mocks
-        CurrencyRate currencyRate = new CurrencyRate();
         Currency eur = Currency.getInstance("EUR");
         Currency gbp = Currency.getInstance("GBP");
 
@@ -28,7 +51,6 @@ public class CurrencyRateTest {
     public void test_getCurrencyRate_nullCurrency_returnIllegalEx() {
 
         // Init context & mocks
-        CurrencyRate currencyRate = new CurrencyRate();
         Currency eur = Currency.getInstance("EUR");
 
         // Execute
@@ -39,7 +61,6 @@ public class CurrencyRateTest {
     public void test_getCurrencyRate_unknownCurrency_returnUnsupportedEx() {
 
         // Init context & mocks
-        CurrencyRate currencyRate = new CurrencyRate();
         Currency eur = Currency.getInstance("EUR");
         Currency mozambique = Currency.getInstance("MZM");
 
@@ -51,7 +72,6 @@ public class CurrencyRateTest {
     public void test_getCurrencyRate_rateReferenceEqualZero_returnUnsupportedEx() {
 
         // Init context & mocks
-        CurrencyRate currencyRate = new CurrencyRate();
         Currency eur = Currency.getInstance("EUR");
         Currency gbp = Currency.getInstance("GBP");
         currencyRate.ratesWithRef.put(eur, 0f);

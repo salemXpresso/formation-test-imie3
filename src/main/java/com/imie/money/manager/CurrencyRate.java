@@ -4,12 +4,11 @@ import com.imie.money.connector.CurrencyRateWsClient;
 
 import java.io.IOException;
 import java.util.Currency;
-import java.util.HashMap;
 import java.util.Map;
 
 public class CurrencyRate {
 
-    protected Map<Currency, Float> ratesWithRef = new HashMap<>();
+    protected Map<Currency, Float> ratesWithRef;
 
     public CurrencyRate(CurrencyRateWsClient currencyRateWsClient, String apiKey) throws IOException {
 

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class CurrencyRate {
 
-    private Map<Currency, Float> ratesWithRef = new HashMap<>();
+    protected Map<Currency, Float> ratesWithRef = new HashMap<>();
     private Currency USD = Currency.getInstance("USD");
     private Currency EUR = Currency.getInstance("EUR");
     private Currency GBP = Currency.getInstance("GBP");
@@ -31,6 +31,11 @@ public class CurrencyRate {
         if(rateWithRef1 == null || rateWithRef2 == null) {
             throw new UnsupportedOperationException
                     ("At least one of the input currencies is unknown by the application");
+        }
+
+        if(rateWithRef1 == 0 || rateWithRef2 == 0) {
+            throw new UnsupportedOperationException
+                    ("One of the input currencies rate is zero. Can't compute the exchange rate");
         }
 
         return rateWithRef1 / rateWithRef2;

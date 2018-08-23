@@ -40,24 +40,26 @@ public class ConverterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_add_sameCurrencyNegativeValue_returnIllegalEx() {
+    public void test_compute_sameCurrencyNegativeValue_returnIllegalEx() {
 
         // Init context & mocks
         Money m1 = new Money(Currency.getInstance("EUR"), -2.15f);
         Money m2 = new Money(Currency.getInstance("EUR"), 2.85f);
+        Operator op = mock(Operator.class);
 
         // Execution
-        converter.add(m1, m2);
+        converter.computeOperation(op, m1, m2);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void test_add_NullMoney_ReturnIllegalEx() {
+    public void test_compute_NullMoney_ReturnIllegalEx() {
 
         // Init context & mocks
         Money m2 = new Money(Currency.getInstance("EUR"), 2.85f);
+        Operator op = mock(Operator.class);
 
         // Execution
-        converter.add(null, m2);
+        converter.computeOperation(op, null, m2);
     }
 
     @Test
@@ -75,5 +77,36 @@ public class ConverterTest {
 
         // Assertions
         assertThat(m).isEqualToComparingFieldByField(new Money(c1, 4.4f));
+    }
+
+    @Test
+    public void test_sub_nominal_returnExpectedResult() {
+
+        // Init context & mocks
+        Money m1 = new Money(Currency.getInstance("EUR"), 3.00f);
+        Money m2 = new Money(Currency.getInstance("EUR"), 2.15f);
+
+        // Execution
+        Money res = converter.sub(m1, m2);
+
+        // Assertions
+        assertThat(res).isEqualToComparingFieldByField(new Money(Currency.getInstance("EUR"), 0.85f));
+    }
+
+    @Test
+    public void test_sub_differentCurrency_returnCurrency1AndRatedResult() {
+
+        // Init context & mocks
+        Currency c1 = Currency.getInstance("USD");
+        Currency c2 = Currency.getInstance("EUR");
+        Money m1 = new Money(c1, 3f);
+        Money m2 = new Money(c2, 2f);
+        when(currencyRate.getCurrencyRate(c1, c2)).thenReturn(1.2f);
+
+        // Execution
+        Money m = converter.sub(m1, m2);
+
+        // Assertions
+        assertThat(m).isEqualToComparingFieldByField(new Money(c1, 0.6f));
     }
 }

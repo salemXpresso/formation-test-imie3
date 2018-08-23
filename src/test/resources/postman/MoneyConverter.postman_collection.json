@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "49e22eca-c1f6-463c-9114-0db43d3d06dd",
+		"name": "MoneyConverter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddSameCurrencyTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e99d84ef-eef4-4bed-a15e-966ad25943e4",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.currency).to.eql(\"EUR\");",
+							"    pm.expect(jsonData.amount).to.eql(4);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddDifferentCurrenciesTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "609880e5-d668-4449-90f6-2168a0b13492",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.currency).to.eql(\"EUR\");",
+							"    pm.expect(jsonData.amount).to.be.above(0);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"USD\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddUnknownCurrencyTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18a8809b-bfba-4ec5-afc9-3a248743cd4d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"UNKNOWN\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddNegativeValueTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18a8809b-bfba-4ec5-afc9-3a248743cd4d",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : -2,\n    \t\"currency\" : \"EUR\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SubSameCurrencyTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a30b0c05-67e4-4962-8fa1-65f15f8b4420",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.currency).to.eql(\"EUR\");",
+							"    pm.expect(jsonData.amount).to.eql(3);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 5,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sub",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sub"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SubDifferentCurrenciesTest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8dad9b15-dba4-4947-a555-27c8606ea66a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.currency).to.eql(\"EUR\");",
+							"    pm.expect(jsonData.amount).to.be.above(0);",
+							"    pm.expect(jsonData.amount).to.be.below(5);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 5,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"USD\"\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sub",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sub"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

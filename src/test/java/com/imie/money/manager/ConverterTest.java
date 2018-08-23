@@ -6,18 +6,23 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Currency;
 
 public class ConverterTest {
 
+    @Mock
     private CurrencyRate currencyRate;
+
+    @InjectMocks
     private Converter converter;
 
     @Before
     public void setUp() {
-        currencyRate = mock(CurrencyRate.class);
-        converter = new Converter(currencyRate);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test

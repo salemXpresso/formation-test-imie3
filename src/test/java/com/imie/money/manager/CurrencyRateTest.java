@@ -1,22 +1,16 @@
 package com.imie.money.manager;
 
-import com.imie.money.connector.CurrencyRateWsClient;
 import org.assertj.core.data.Offset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.util.Currency;
 import java.util.HashMap;
-import java.util.Map;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CurrencyRateTest {
 
@@ -27,19 +21,13 @@ public class CurrencyRateTest {
     @InjectMocks
     private CurrencyRate currencyRate;
 
-    @Mock
-    CurrencyRateWsClient mockedWsClient;
-
     @Before
     public void setUp() throws IOException {
         MockitoAnnotations.initMocks(this);
-
-        Map<Currency, Float> ratesWithRef = new HashMap<>();
-        ratesWithRef.put(USD, 1f);
-        ratesWithRef.put(EUR, 1.16f);
-        ratesWithRef.put(GBP, 1.29f);
-        when(mockedWsClient.downloadLatestCurrencyRates(anyString())).thenReturn(ratesWithRef);
-        currencyRate.downloadLastCurrencyRates();
+        currencyRate.ratesWithRef = new HashMap<>();
+        currencyRate.ratesWithRef.put(USD, 1f);
+        currencyRate.ratesWithRef.put(EUR, 1.16f);
+        currencyRate.ratesWithRef.put(GBP, 1.29f);
     }
 
     @Test

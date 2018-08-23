@@ -39,6 +39,7 @@ public class CurrencyRateTest {
         ratesWithRef.put(EUR, 1.16f);
         ratesWithRef.put(GBP, 1.29f);
         when(mockedWsClient.downloadLatestCurrencyRates(anyString())).thenReturn(ratesWithRef);
+        currencyRate.downloadLastCurrencyRates();
     }
 
     @Test

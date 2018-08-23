@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-@Configuration
 @ComponentScan("com.imie.money")
 public class MoneyApplication {
 

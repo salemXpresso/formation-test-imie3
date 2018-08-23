@@ -8,6 +8,9 @@ public class Money {
 
     private float amount;
 
+    public Money() {
+    }
+
     public Money(Currency currency, float amount) {
         this.currency = currency;
         this.amount = amount;
@@ -19,5 +22,13 @@ public class Money {
 
     public float getAmount() {
         return amount;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
 }

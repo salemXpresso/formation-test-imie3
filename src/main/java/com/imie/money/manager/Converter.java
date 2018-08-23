@@ -1,16 +1,20 @@
 package com.imie.money.manager;
 
 import com.imie.money.model.Money;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
+@Component
+@RestController
 public class Converter {
 
+    @Autowired
     private CurrencyRate currencyRate;
 
-    public Converter(CurrencyRate currencyRate) {
-
-        this.currencyRate = currencyRate;
-    }
-
+    @RequestMapping(method= RequestMethod.POST)
     public Money add(Money m1, Money m2) {
 
         if(m1==null || m2==null) {

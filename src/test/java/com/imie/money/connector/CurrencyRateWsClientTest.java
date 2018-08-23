@@ -24,6 +24,7 @@ public class CurrencyRateWsClientTest {
                         "        \"AUD\": 1.566015,\n" +
                         "        \"CAD\": 1.560132,\n" +
                         "        \"CHF\": 1.154727,\n" +
+                        "        \"UKNOWN_CURRENCY\": 1.154727,\n" +
                         "        \"CNY\": 7.827874,\n" +
                         "        \"GBP\": 0.882047,\n" +
                         "        \"JPY\": 132.360679,\n" +

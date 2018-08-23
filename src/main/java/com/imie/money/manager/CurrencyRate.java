@@ -1,19 +1,27 @@
 package com.imie.money.manager;
 
 import com.imie.money.connector.CurrencyRateWsClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Currency;
 import java.util.Map;
 
+@Component
 public class CurrencyRate {
 
     protected Map<Currency, Float> ratesWithRef;
 
-    public CurrencyRate(CurrencyRateWsClient currencyRateWsClient, String apiKey) throws IOException {
+    @Autowired
+    private CurrencyRateWsClient currencyRateWsClient;
 
-        Currency reference = Currency.getInstance("USD");
-        ratesWithRef = currencyRateWsClient.downloadLatestCurrencyRates(apiKey, reference);
+    @PostConstruct
+    public void downloadLastCurrencyRates() throws IOException {
+
+        String apiKey = System.getProperty("fixed.io.api.key");
+        ratesWithRef = currencyRateWsClient.downloadLatestCurrencyRates(apiKey);
     }
 
     public float getCurrencyRate(Currency c1, Currency c2) {

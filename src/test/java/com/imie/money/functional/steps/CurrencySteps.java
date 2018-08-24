@@ -83,7 +83,7 @@ public class CurrencySteps {
         boolean resultatBoxIsDisplayed = false;
         for(WebElement anElement : webElementList) {
             String text = anElement.getText();
-            if("Résultats".equals(text)) {
+            if(text.endsWith("sultats")) {
                 resultatBoxIsDisplayed = true;
                 break;
             }
@@ -98,7 +98,7 @@ public class CurrencySteps {
         List<WebElement> boldTextList = paragraphs.get(1).findElement(By.tagName("p")).findElements(By.tagName("strong"));
         String result = boldTextList.get(1).getText();
         float parsedResult = Float.parseFloat(result.replace(',', '.'));
-        assertThat(parsedResult).isCloseTo(expectedResult, Offset.offset(0.1f));
+        assertThat(parsedResult).isCloseTo(expectedResult, Offset.offset(0.5f));
     }
 
     @Then("^The user closes his Web browser$")

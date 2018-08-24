@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.File;
 import java.util.HashMap;
@@ -41,7 +43,8 @@ public class DriverFactory {
                     .build();
             driver = new ChromeDriver(service, options);
         } else {
-            driver = new FirefoxDriver();
+            FirefoxOptions opts = new FirefoxOptions().setLogLevel(FirefoxDriverLogLevel.TRACE);
+            driver = new FirefoxDriver(opts);
         }
     }
 

@@ -20,6 +20,3 @@ Feature: Currency Calculator form
 
     # Post requisites
     And The user closes his Web browser
-
-
-

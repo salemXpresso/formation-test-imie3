@@ -7,9 +7,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 public class DriverFactory {
 
@@ -43,8 +48,23 @@ public class DriverFactory {
                     .build();
             driver = new ChromeDriver(service, options);
         } else {
-            FirefoxOptions opts = new FirefoxOptions().setLogLevel(FirefoxDriverLogLevel.TRACE);
-            driver = new FirefoxDriver(opts);
+            LoggingPreferences loggingPrefs = new LoggingPreferences();
+            loggingPrefs.enable(LogType.BROWSER, Level.ALL);
+            loggingPrefs.enable(LogType.CLIENT, Level.ALL);
+            loggingPrefs.enable(LogType.DRIVER, Level.ALL);
+            loggingPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+            loggingPrefs.enable(LogType.PROFILER, Level.ALL);
+            loggingPrefs.enable(LogType.SERVER, Level.ALL);
+
+            DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+            desiredCapabilities.setCapability("marionette", true);
+            desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            desiredCapabilities.setCapability(CapabilityType.LOGGING_PREFS, loggingPrefs);
+
+            FirefoxOptions options = new FirefoxOptions();
+            options.merge(desiredCapabilities);
+            options.setLogLevel(FirefoxDriverLogLevel.TRACE);
+            driver = new FirefoxDriver(options);
         }
     }
 

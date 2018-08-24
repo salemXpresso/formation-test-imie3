@@ -41,12 +41,12 @@
 					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/add",
+					"raw": "http://localhost:9090/add",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"add"
 					]
@@ -90,12 +90,12 @@
 					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"USD\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/add",
+					"raw": "http://localhost:9090/add",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"add"
 					]
@@ -132,12 +132,12 @@
 					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"UNKNOWN\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/add",
+					"raw": "http://localhost:9090/add",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"add"
 					]
@@ -174,12 +174,12 @@
 					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : -2,\n    \t\"currency\" : \"EUR\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/add",
+					"raw": "http://localhost:9090/add",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"add"
 					]
@@ -222,12 +222,12 @@
 					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 5,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"EUR\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/sub",
+					"raw": "http://localhost:9090/sub",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"sub"
 					]
@@ -272,12 +272,12 @@
 					"raw": "{\n    \"m1\": {\n    \t\"amount\" : 5,\n    \t\"currency\" : \"EUR\"\n    },\n    \"m2\": {\n    \t\"amount\" : 2,\n    \t\"currency\" : \"USD\"\n    }\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/sub",
+					"raw": "http://localhost:9090/sub",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"sub"
 					]
